@@ -1,10 +1,10 @@
 package com.detalle.pagina.controller;
 
 import com.detalle.pagina.data.CategoriaData;
-import com.detalle.pagina.data.ImagenData;
 import com.detalle.pagina.data.MomentoData;
 import com.detalle.pagina.domain.Momento;
 import java.io.File;
+import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +26,6 @@ public class DetalleController {
 
     private final CategoriaData catData = new CategoriaData();
     private final MomentoData momData = new MomentoData();
-    private final ImagenData imgData = new ImagenData();
 
     @GetMapping("/")
     public String mostrarMenu() {
@@ -56,21 +59,20 @@ public class DetalleController {
     }
 
    @GetMapping("/galeria")
-public String mostrarGaleria(Model model) {
-    // Ruta a la carpeta física
-    File folder = new File("src/main/resources/static/images/galeria/");
-    File[] listOfFiles = folder.listFiles();
+public String mostrarGaleria(Model model) throws IOException {
+    
     
     List<String> nombresFotos = new ArrayList<>();
-    if (listOfFiles != null) {
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                // Guardamos solo el nombre del archivo
-                nombresFotos.add(file.getName());
-            }
-        }
-    }
     
+    // Esto busca los archivos dentro del JAR
+    ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    Resource[] resources = resolver.getResources("classpath:/static/images/galeria/*");
+
+    for (Resource resource : resources) {
+        // Solo agregamos el nombre del archivo
+        nombresFotos.add(resource.getFilename());
+    }
+
     model.addAttribute("fotos", nombresFotos);
     return "galeria";
 }
