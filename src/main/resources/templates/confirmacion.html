@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Guardado!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="animate__animated animate__bounceIn">
+    <div class="container">
+        <h1 class="animate__animated animate__pulse animate__infinite">¡Listo! 🌹</h1>
+        <p>Tu mensaje: <strong th:text="${detalleEnviado}"></strong></p>
+        <p>Ha sido guardado en mi corazón (y en la base de datos).</p>
+        <br>
+        <a th:href="@{/}" style="text-decoration: none; color: #ff6b6b;">← Volver</a>
+    </div>
+</body>
+</html>

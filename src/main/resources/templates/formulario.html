@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Un Detalle para Ti</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    </head>
+    <body class="animate__animated animate__fadeIn">
+
+        <div class="form-container">
+            <div class="form-card">
+                <h2>✨ Crea un nuevo recuerdo ✨</h2>
+                <p>Escribe algo lindo para guardar en nuestra base de datos.</p>
+
+                <form th:action="@{/guardarMomento}" method="post">
+                    <div class="input-group">
+                        <label>¿Qué quieres decir?</label>
+                        <input type="text" name="descripcion" placeholder="Escribe aquí nuestro recuerdo..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Que dicen tus palabras</label>
+                        <select name="idCategoria">
+                            <option th:each="cat : ${categorias}" 
+                                    th:value="${cat.idCategoria}" 
+                                    th:text="${cat.nombre}">
+                                Nombre de Categoría
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Prioridad (Nivel de cariño 1-5):</label>
+                        <input type="number" name="prioridad" min="1" max="5" value="5">
+                    </div>
+
+                    <button type="submit" class="btn-guardar">Guardar Recuerdo 💗</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

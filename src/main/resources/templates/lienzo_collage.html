@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Lienzo Mágico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="body-lienzo">
+    
+    <a th:href="@{/}" class="back-btn-lienzo">← Menú</a>
+
+    <div class="lienzo-wrapper">
+        <header class="lienzo-header">
+            <h1 class="title-lienzo animate__animated animate__pulse animate__infinite">Nuestro Collage 💖</h1>
+        </header>
+
+        <div class="collage-grid">
+            <div class="collage-card animate__animated animate__fadeInDown">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto1.jpg" alt="Momento 1">
+                </div>
+            </div>
+
+            <div class="collage-card animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto2.jpg" alt="Momento 2">
+                </div>
+            </div>
+
+            <div class="collage-card animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto3.jpg" alt="Momento 3">
+                </div>
+            </div>
+
+            <div class="collage-card animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto4.jpg" alt="Momento 4">
+                </div>
+            </div>
+
+            <div class="collage-card animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto5.jpg" alt="Momento 5">
+                </div>
+            </div>
+
+            <div class="collage-card animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                <div class="card-inner">
+                    <img src="https://i.imgur.com/TuLinkDirecto6.jpg" alt="Momento 6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

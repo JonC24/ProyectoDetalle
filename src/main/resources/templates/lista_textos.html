@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <div class="main-wrapper">
+        <header class="menu-header">
+            <h1 class="title" th:text="${titulo}"></h1>
+            <a th:href="@{/}" class="subtitle">← Volver al menú</a>
+        </header>
+
+        <div class="textos-container">
+            <div th:each="m : ${momentos}" class="texto-card animate__animated animate__fadeInUp">
+                <p class="quote">"</p>
+                <p class="contenido" th:text="${m.getDescripcion()}"></p>
+                <div class="prioridad-heart">
+                    <span th:each="i : ${#numbers.sequence(1, m.getPrioridad())}">❤️</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

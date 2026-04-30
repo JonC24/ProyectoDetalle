@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nuestra Galería</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    </head>
+    <body class="animate__animated animate__fadeIn">
+
+        <div class="main-wrapper">
+            <header class="menu-header">
+                <h1 class="title">Nuestra Galería 📸</h1>
+                <a th:href="@{/}" class="subtitle" style="text-decoration: none;">← Volver al menú</a>
+            </header>
+
+            <div class="gallery-container">
+                <div class="gallery-grid">
+                    <div class="card" th:each="foto : ${fotos}">
+                        <div class="card-img-wrapper">
+                            <img th:src="@{'/images/galeria/' + ${foto}}" 
+                                 th:alt="${#strings.substringBefore(foto, '.')}"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

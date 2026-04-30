@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eres la mujer de mis ojos</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    </head>
+    <body>
+
+        <div class="main-wrapper animate__animated animate__fadeIn">
+            <header class="menu-header">
+                <h1 class="title animate__animated animate__heartBeat animate__infinite">💖 Nuestro Espacio 💖</h1>
+                <p class="subtitle">Un rincón especial para ti</p>
+            </header>
+
+            <div class="acceso-musica">
+                <a href="https://open.spotify.com/playlist/795q0BFQae32KVWJtiyTTd?si=91d36a109ab84935" target="_blank" class="boton-spotify">
+                    <span class="icono">🎧</span> Escuchar tu playlist en Spotify
+                </a>
+            </div>
+            <div class="acceso-musica">
+                <a href="https://music.youtube.com/playlist?list=PLlRI4v2-fL3uoMKbNgozfnjKCNLwAseLE&si=VE4dH6S5_5Pq25ym" target="_blank" class="boton-ytmusic">
+                    <span class="icono">🎧</span> Escuchar tu playlist en Youtube Music
+                </a>
+            </div>
+
+            <nav class="menu-grid">
+                <a th:href="@{/lienzo}" class="card animate__animated animate__zoomIn" style="animation-delay: 0.4s; background: #222; border-color: #ff6b6b;">
+                    <div class="card-icon">✨</div>
+                    <div class="card-content">
+                        <h3 style="color: white;">Algo magico como tu existencia</h3>
+                        <p style="color: #ccc;">Una sorpresa interactiva</p>
+                    </div>
+                </a>
+
+                <a th:href="@{/galeria}" class="card animate__animated animate__backInRight">
+                    <div class="card-icon">📸</div>
+                    <div class="card-content">
+                        <h3>Nuestra Galería</h3>
+                        <p>Mira nuestras fotitas</p>
+                    </div>
+                </a>
+
+                <a th:href="@{/poemas}" class="card animate__animated animate__backInLeft" style="animation-delay: 0.2s;">
+                    <div class="card-icon">📜</div>
+                    <div class="card-content">
+                        <h3>Poemas</h3>
+                        <p>Versos dedicados para ti</p>
+                    </div>
+                </a>
+
+                <a th:href="@{/promesas}" class="card animate__animated animate__backInRight" style="animation-delay: 0.2s;">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-content">
+                        <h3>Promesas</h3>
+                        <p>Lo que siempre cumpliré</p>
+                    </div>
+                </a>
+
+                <a th:href="@{/sorpresa}" class="card animate__animated animate__backInLeft">
+                    <div class="card-icon">✍️</div>
+                    <div class="card-content">
+                        <h3>Escribir unas palabras</h3>
+                        <p>Guarda algo lindo para hoy</p>
+                    </div>
+                </a>
+
+            </nav>
+        </div>
+
+    </body>
+</html>
