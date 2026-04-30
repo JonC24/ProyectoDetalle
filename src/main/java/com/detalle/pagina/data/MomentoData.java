@@ -7,27 +7,31 @@ import java.util.List;
 
 public class MomentoData {
     
+    // Método para insertar (Usa INSERT directo ahora)
     public boolean insertarMomento(Momento m) throws SQLException {
-        String sql = "{call insertarMomento(?, ?, ?)}"; // Llamada al procedimiento 
+        // SQL directo en lugar de {call...}
+        String sql = "INSERT INTO momento (descripcion, prioridad, idCategoria) VALUES (?, ?, ?)"; 
+        
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             
-            cs.setString(1, m.getDescripcion());
-            cs.setInt(2, m.getPrioridad());
-            cs.setInt(3, m.getIdCategoria());
+            ps.setString(1, m.getDescripcion());
+            ps.setInt(2, m.getPrioridad());
+            ps.setInt(3, m.getIdCategoria());
             
-            return cs.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         }
     }
     
-    // Método para obtener todos los registros (GET ALL)
+    // Método para obtener todos los registros (Usa SELECT directo ahora)
     public List<Momento> listarMomentos() throws SQLException {
         List<Momento> lista = new ArrayList<>();
-        String sql = "{call listarMomentos()}"; // Llamada al procedimiento
+        // SELECT directo en lugar de {call...}
+        String sql = "SELECT id, descripcion, prioridad, idCategoria FROM momento"; 
         
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             
             while (rs.next()) {
                 Momento m = new Momento();
@@ -41,17 +45,18 @@ public class MomentoData {
         return lista;
     }
 
-    // Método para obtener un registro por su ID (GET BY ID)
+    // Método para obtener un registro por su ID (Usa SELECT con WHERE ahora)
     public Momento obtenerMomentoPorId(int idBusqueda) throws SQLException {
         Momento m = null;
-        String sql = "{call obtenerMomentoPorId(?)}";
+        // SELECT con filtro en lugar de {call...}
+        String sql = "SELECT id, descripcion, prioridad, idCategoria FROM momento WHERE id = ?";
         
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             
-            cs.setInt(1, idBusqueda);
+            ps.setInt(1, idBusqueda);
             
-            try (ResultSet rs = cs.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     m = new Momento();
                     m.setId(rs.getInt("id"));

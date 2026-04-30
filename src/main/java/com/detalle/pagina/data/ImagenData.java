@@ -8,11 +8,14 @@ import java.util.List;
 public class ImagenData {
     public List<Imagen> listarImagenes() throws SQLException {
         List<Imagen> lista = new ArrayList<>();
-        String sql = "{call listarGaleria()}";
+        // Cambiamos el {call listarGaleria()} por el SELECT directo
+        String sql = "SELECT id, url, pieDeFoto FROM galeria";
         
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+             // Usamos PreparedStatement en lugar de CallableStatement
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            
             while (rs.next()) {
                 lista.add(new Imagen(
                     rs.getInt("id"),

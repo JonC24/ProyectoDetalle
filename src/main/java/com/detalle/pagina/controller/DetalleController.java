@@ -102,7 +102,7 @@ public String mostrarGaleria(Model model) {
         List<Momento> promesas = todos.stream()
                 .filter(m -> m.getIdCategoria() == 3)
                 .toList();
-        model.addAttribute("titulo", "Mis Promesas 🤝");
+        model.addAttribute("titulo", "Te Prometo 🤝");
         model.addAttribute("momentos", promesas);
         return "lista_textos";
     }

@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.detalle.pagina.data;
-import com.detalle.pagina.domain.Categoria;
 
-import com.detalle.pagina.domain.Momento;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.detalle.pagina.domain.Categoria;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +10,16 @@ import java.util.List;
  * @author cjon4
  */
 public class CategoriaData {
-    // Método para obtener todos los registros (GET ALL)
+
+    // Método para obtener todos los registros (Usa SELECT directo)
     public List<Categoria> listarCategorias() throws SQLException {
         List<Categoria> lista = new ArrayList<>();
-        String sql = "{call listarCategorias()}"; // Llamada al procedimiento
+        // SQL directo en lugar de {call...}
+        String sql = "SELECT idCategoria, nombre FROM categoria"; 
         
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql);
-             ResultSet rs = cs.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             
             while (rs.next()) {
                 Categoria s = new Categoria();
@@ -37,25 +31,25 @@ public class CategoriaData {
         return lista;
     }
 
-    // Método para obtener un registro por su ID (GET BY ID)
+    // Método para obtener un registro por su ID (Usa SELECT con WHERE)
     public Categoria obtenerCategoriaPorId(int idBusqueda) throws SQLException {
         Categoria c = null;
-        String sql = "{call obtenerCategoriaPorId(?)}";
+        // SELECT filtrado en lugar de {call...}
+        String sql = "SELECT idCategoria, nombre FROM categoria WHERE idCategoria = ?";
         
         try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             
-            cs.setInt(1, idBusqueda);
+            ps.setInt(1, idBusqueda);
             
-            try (ResultSet rs = cs.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     c = new Categoria();
                     c.setIdCategoria(rs.getInt("idCategoria"));
-                    c.setNombre(rs.getString("nombre "));
+                    c.setNombre(rs.getString("nombre")); // Corregido espacio extra
                 }
             }
         }
         return c;
     }
-    
 }
