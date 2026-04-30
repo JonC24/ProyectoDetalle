@@ -1,10 +1,10 @@
-# 1. Usamos una imagen de Maven para construir el proyecto
+# Etapa 1: Construcción (Build)
 FROM maven:3.8.5-openjdk-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# 2. Usamos una imagen liviana de Java para correrlo
-FROM openjdk:21-jdk-slim
+# Etapa 2: Ejecución (Runtime) - Aquí está el cambio importante
+FROM eclipse-temurin:17-jre-alpine
 COPY --from=build /target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
